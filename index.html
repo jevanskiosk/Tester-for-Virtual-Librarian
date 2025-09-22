@@ -8,23 +8,22 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      height: 100%;
+      width: 100%;
       font-family: 'Baloo 2', cursive, sans-serif;
-      display: flex;
-      flex-direction: column;
-
-      /* GitHub Pages-friendly background */
-      background: url('images/myBookBuddyBackground.png') no-repeat center center fixed;
+      background-color: black; /* fallback color */
+      background: url('images/mybookbuddybackground.png') no-repeat center center fixed;
       background-size: cover;
+      overflow-x: hidden;
     }
 
     /* Crawl bar at the top */
     .crawl {
       width: 100%;
-      background: transparent;
+      background: rgba(0,0,0,0.5); /* semi-transparent so text is readable */
       color: white;
       padding: 10px 0;
       font-size: 18px;
@@ -32,6 +31,7 @@
       position: relative;
       white-space: nowrap;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+      z-index: 10;
     }
 
     .crawl span {
@@ -55,12 +55,16 @@
       gap: 60px;
       box-sizing: border-box;
       margin-top: 10px;
+      z-index: 5;
+      position: relative;
     }
 
     .sidebar {
       max-width: 340px;
       color: white;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      z-index: 5;
+      position: relative;
     }
 
     /* Title box */
@@ -122,7 +126,7 @@
     .button-group a {
       display: inline-block;
       padding: 14px 24px;
-      background: #1E3A8A;
+      background: #1e3a8a;
       color: white;
       font-size: 22px;
       font-weight: 600;
@@ -133,7 +137,7 @@
     }
 
     .button-group a:hover {
-      background: #3B82F6;
+      background: #3b82f6;
       transform: scale(1.05);
     }
 
@@ -144,6 +148,8 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
       border-radius: 12px;
       background: transparent;
+      z-index: 5;
+      position: relative;
     }
 
     @media (max-width: 800px) {
