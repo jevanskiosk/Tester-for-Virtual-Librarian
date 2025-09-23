@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +7,13 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursive,sans-serif;background:url('myBookBuddy Background.png') no-repeat center center fixed;background-size:cover;overflow-x:hidden;}
-.crawl{width:100%;color:white;padding:10px 0;font-size:18px;overflow:hidden;white-space:nowrap;text-shadow:1px 1px 4px rgba(0,0,0,0.8);z-index:10;}
-.crawl span{display:inline-block;padding-left:100%;animation:scroll-left 25s linear infinite;}
+.crawl{width:100%;color:white;padding:10px 0;font-size:36px;overflow:hidden;white-space:nowrap;text-shadow:1px 1px 4px rgba(0,0,0,0.8);z-index:10;}
+.crawl span{display:inline-block;padding-left:100%;animation:scroll-left 50s linear infinite;}
 @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-100%);}}
 .container{display:flex;flex-direction:row;align-items:flex-start;padding:0 40px;gap:60px;margin-top:10px;}
 .chatbot{width:26vw;height:85vh;border:none;box-shadow:0 0 10px rgba(0,0,0,0.3);border-radius:12px;background:transparent;margin-left:200px;z-index:5;}
 .sidebar{display:flex;flex-direction:column;max-width:380px;color:white;text-shadow:1px 1px 4px rgba(0,0,0,0.7);margin-left:225px;margin-top:100px;z-index:5;}
-.title-box{background:white;color:black;border-radius:9999px;padding:28px 35px;margin-bottom:30px;position:relative;max-width:416px;font-size:28px;font-weight:600;line-height:1.4;margin-left:50px;transform:rotate(-5deg);}
+.title-box{background:white;color:black;border-radius:9999px;padding:28px 35px;margin-bottom:30px;position:relative;max-width:416px;font-size:28px;font-weight:600;line-height:1.4;margin-left:-25px;transform:rotate(-5deg);}
 .title-box::after{content:'';position:absolute;bottom:0;right:0;width:80px;height:40px;background:white;border-radius:0 50% 50% 50%;clip-path:none;}
 .qr-section{text-align:left;margin-bottom:20px;}
 .qr-section h3{font-size:30px;margin-bottom:10px;}
@@ -52,7 +51,7 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 function openPopup(url){document.getElementById('popupFrame').src=url;document.getElementById('popupWindow').style.display='block';}
 function closePopup(){document.getElementById('popupWindow').style.display='none';document.getElementById('popupFrame').src='';}
 dragElement(document.getElementById("popupWindow"));
-function dragElement(elm){var pos1=0,pos2=0,pos3=0,pos4=0;var header=document.getElementById(elm.id+"Header");if(!header){header=elm;}header.onmousedown=dragMouseDown;function dragMouseDown(e){e=e||window.event;e.preventDefault();pos3=e.clientX;pos4=e.clientY;document.onmouseup=closeDragElement;document.onmousemove=elementDrag;}function elementDrag(e){e=e||window.event;e.preventDefault();pos1=pos3-e.clientX;pos2=pos4-e.clientY;pos3=e.clientX;pos4=e.clientY;elm.style.top=(elm.offsetTop-pos2)+"px";elm.style.left=(elm.offsetLeft-pos1)+"px";}function closeDragElement(){document.onmouseup=null;document.onmousemove=null;}}
+function dragElement(elm){var pos1=0,pos2=0,pos3=0,pos4=0;var header=document.getElementById(elm.id+"Header");if(!header){header=elm;}header.onmousedown=dragMouseDown;function dragMouseDown(e){e=e||window.event;e.preventDefault();pos3=e.clientX;pos4=e.clientY;document.onmouseup=closeDragElement;document.onmousemove=elementDrag;}function elementDrag(e){e=e||window.event;e.preventDefault();pos1=pos3-e.clientX;pos2=pos4-e.clientY;pos3=e.clientX;pos4=e.clientY;elm.style.top=(elm.offsetTop-pos2)+"px";elm.style.left=(elm.offsetLeft-pos1)+"px";}function closeDragElement(){document.onmouseup=null;document.onmousemove=null;}
 </script>
 </body>
 </html>
