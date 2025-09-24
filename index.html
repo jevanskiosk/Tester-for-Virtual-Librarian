@@ -6,77 +6,276 @@
 <title>Virtual Librarian</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
-html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursive,sans-serif;background:url('myBookBuddy Background.png') no-repeat center center fixed;background-size:cover;overflow-x:hidden;}
-.crawl{width:100%;color:white;padding:10px 0;font-size:36px;overflow:hidden;white-space:nowrap;text-shadow:1px 1px 4px rgba(0,0,0,0.8);z-index:10;}
-.crawl span{display:inline-block;padding-left:100%;animation:scroll-left 50s linear infinite;}
-@keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-100%);}}
-.container{display:flex;flex-direction:row;align-items:flex-start;padding:0 40px;gap:60px;margin-top:10px;}
-.chatbot{width:26vw;height:85vh;border:none;box-shadow:0 0 10px rgba(0,0,0,0.3);border-radius:12px;background:transparent;margin-left:200px;z-index:5;}
-.sidebar{display:flex;flex-direction:column;max-width:380px;color:white;text-shadow:1px 1px 4px rgba(0,0,0,0.7);margin-left:225px;margin-top:100px;z-index:5;}
-.title-box{
-  background:white;
-  color:black;
-  border-radius:9999px;
-  padding:28px 35px;
-  margin-bottom:30px;
-  position:relative;
-  z-index:1;
-  max-width:416px;
-  font-size:28px;
+
+html,body {
+  margin:0;
+  padding:0;
+  height:100%;
+  width:100%;
+  font-family:'Baloo 2',cursive,sans-serif;
+  background:url('myBookBuddy Background.png') no-repeat center center fixed;
+  background-size:cover;
+  overflow-x:hidden;
+}
+
+/* Crawl text */
+.crawl {
+  width:100%;
+  color:white;
+  padding:10px 0;
+  font-size:36px; /* doubled */
+  overflow:hidden;
+  white-space:nowrap;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.8);
+  z-index:10;
+}
+.crawl span {
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll-left 50s linear infinite; /* half speed */
+}
+@keyframes scroll-left {
+  from {transform:translateX(0);}
+  to {transform:translateX(-100%);}
+}
+
+/* Layout */
+.container {
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  padding:0 40px;
+  gap:60px;
+  margin-top:10px;
+}
+.chatbot {
+  width:26vw;
+  height:85vh;
+  border:none;
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
+  border-radius:12px;
+  background:transparent;
+  margin-left:200px;
+  z-index:5;
+}
+.sidebar {
+  display:flex;
+  flex-direction:column;
+  max-width:380px;
+  color:white;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.7);
+  margin-left:225px;
+  margin-top:100px;
+  z-index:5;
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  background: white;
+  border-radius: 50%; /* fully round */
+  padding: 35px 50px;
+  color: black;
+  font-size: 28px;
+  font-weight: 600;
+  max-width: 400px;
+  text-align: center;
+  line-height: 1.4;
+  transform: rotate(-5deg);
+  margin-left: 0px;
+  margin-bottom: 30px;
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 30px; /* vertical placement */
+  left: -40px;  /* move toward avatar */
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-right-color: white;
+  border-left: 0;
+  margin-top: -15px;
+}
+
+/* QR + Buttons */
+.qr-section {
+  text-align:center;
+  margin-bottom:20px;
+}
+.qr-section h3 {
+  font-size:30px;
+  margin-bottom:10px;
+}
+.qr-section img {
+  width:160px;
+  height:160px;
+}
+
+.button-section {
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.button-group {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:center;
+}
+.button-group h4 {
+  margin:0;
+  font-size:30px;
   font-weight:600;
-  line-height:1.4;
-  margin-left:-75px;
-  transform:rotate(-5deg);
 }
-.title-box::after{
-  content:'';
-  position:absolute;
-  bottom:0;
-  right:0;
-  width:80px;
-  height:40px;
+.button-group a {
+  display:inline-block;
+  padding:16px 28px;
+  background:#1e3a8a;
+  color:white;
+  font-size:30px;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:12px;
+  box-shadow:0 0 8px rgba(0,0,0,0.5);
+  transition:background 0.3s ease,transform 0.2s ease;
+  max-width:fit-content;
+  cursor:pointer;
+}
+.button-group a:hover {
+  background:#3b82f6;
+  transform:scale(1.05);
+}
+
+/* Popup */
+.popup {
+  position:fixed;
+  top:50px;
+  right:50px;
+  width:50%;
+  height:80%;
   background:white;
-  border-radius:50%;
-  clip-path:none;
-  pointer-events:none;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+  z-index:20;
+  display:none;
+  border-radius:12px;
+  overflow:hidden;
 }
-.qr-section{text-align:center;margin-bottom:20px;}
-.qr-section h3{font-size:30px;margin-bottom:10px;}
-.qr-section img{width:160px;height:160px;}
-.button-section{display:flex;flex-direction:column;gap:15px;}
-.button-group{display:flex;flex-direction:column;gap:6px;}
-.button-group h4{margin:0;font-size:30px;font-weight:600;}
-.button-group a{display:inline-block;padding:16px 28px;background:#1e3a8a;color:white;font-size:30px;font-weight:600;text-decoration:none;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.5);transition:background 0.3s ease,transform 0.2s ease;max-width:fit-content;cursor:pointer;}
-.button-group a:hover{background:#3b82f6;transform:scale(1.05);}
-.popup{position:fixed;top:50px;right:50px;width:50%;height:80%;background:white;box-shadow:0 0 15px rgba(0,0,0,0.3);z-index:20;display:none;border-radius:12px;overflow:hidden;}
-.popup-header{background:#1e3a8a;color:white;font-weight:600;padding:10px;cursor:move;display:flex;justify-content:space-between;align-items:center;}
-.popup-header button{background:transparent;border:none;color:white;font-size:20px;cursor:pointer;}
-.popup iframe{width:100%;height:calc(100% - 40px);border:none;}
-@media (max-width:800px){.container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}.chatbot{width:90vw;height:75vh;margin-left:0;}.sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;}.title-box{max-width:80%;text-align:center;margin-left:0;transform:rotate(0deg);}.title-box::after{left:50%;bottom:0;transform:translateX(-50%) rotate(180deg);width:30px;height:15px;border-radius:50%;}.qr-section h3{font-size:30px;}.qr-section img{width:130px;height:130px;}.button-group h4{font-size:20px;}.button-group a{font-size:20px;padding:12px 18px;}}
+.popup-header {
+  background:#1e3a8a;
+  color:white;
+  font-weight:600;
+  padding:10px;
+  cursor:move;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.popup-header button {
+  background:transparent;
+  border:none;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+.popup iframe {
+  width:100%;
+  height:calc(100% - 40px);
+  border:none;
+}
+
+/* Responsive */
+@media (max-width:800px){
+  .container {flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}
+  .chatbot {width:90vw;height:75vh;margin-left:0;}
+  .sidebar {align-items:center;max-width:90%;margin-left:0;margin-top:0;}
+  .speech-bubble {max-width:80%;text-align:center;margin-left:0;transform:rotate(0deg);}
+  .speech-bubble::after {left:50%;bottom:0;transform:translateX(-50%) rotate(180deg);width:30px;height:15px;border-radius:50%;}
+  .qr-section h3 {font-size:30px;}
+  .qr-section img {width:130px;height:130px;}
+  .button-group h4 {font-size:20px;}
+  .button-group a {font-size:20px;padding:12px 18px;}
+}
 </style>
 </head>
 <body>
-<div class="crawl"><span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span></div>
+
+<div class="crawl">
+  <span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span>
+</div>
+
 <div class="container">
-<iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
-<div class="sidebar">
-<div class="title-box">Chat with our AI book suggestion bot to find the perfect book!</div>
-<div class="qr-section"><h3>Check us out on YouTube</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel"></div>
-<div class="button-section">
-<div class="button-group"><h4>Our Library Catalog</h4><a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a></div>
-<div class="button-group"><h4>Our eBook Catalog</h4><a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a></div>
+  <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
+
+  <div class="sidebar">
+    <div class="speech-bubble">
+      Chat with our AI book suggestion bot to find the perfect book!
+    </div>
+
+    <div class="qr-section">
+      <h3>Check us out on YouTube</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel">
+    </div>
+
+    <div class="button-section">
+      <div class="button-group">
+        <h4>Our Library Catalog</h4>
+        <a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a>
+      </div>
+      <div class="button-group">
+        <h4>Our eBook Catalog</h4>
+        <a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+
 <div class="popup" id="popupWindow">
-<div class="popup-header" id="popupHeader"><span>Catalog</span><button onclick="closePopup()">✖</button></div>
-<iframe id="popupFrame" src=""></iframe>
+  <div class="popup-header" id="popupHeader">
+    <span>Catalog</span>
+    <button onclick="closePopup()">✖</button>
+  </div>
+  <iframe id="popupFrame" src=""></iframe>
 </div>
+
 <script>
-function openPopup(url){document.getElementById('popupFrame').src=url;document.getElementById('popupWindow').style.display='block';}
-function closePopup(){document.getElementById('popupWindow').style.display='none';document.getElementById('popupFrame').src='';}
+function openPopup(url){
+  document.getElementById('popupFrame').src=url;
+  document.getElementById('popupWindow').style.display='block';
+}
+function closePopup(){
+  document.getElementById('popupWindow').style.display='none';
+  document.getElementById('popupFrame').src='';
+}
 dragElement(document.getElementById("popupWindow"));
-function dragElement(elm){var pos1=0,pos2=0,pos3=0,pos4=0;var header=document.getElementById(elm.id+"Header");if(!header){header=elm;}header.onmousedown=dragMouseDown;function dragMouseDown(e){e=e||window.event;e.preventDefault();pos3=e.clientX;pos4=e.clientY;document.onmouseup=closeDragElement;document.onmousemove=elementDrag;}function elementDrag(e){e=e||window.event;e.preventDefault();pos1=pos3-e.clientX;pos2=pos4-e.clientY;pos3=e.clientX;pos4=e.clientY;elm.style.top=(elm.offsetTop-pos2)+"px";elm.style.left=(elm.offsetLeft-pos1)+"px";}function closeDragElement(){document.onmouseup=null;document.onmousemove=null;}}
+function dragElement(elm){
+  var pos1=0,pos2=0,pos3=0,pos4=0;
+  var header=document.getElementById(elm.id+"Header");
+  if(!header){header=elm;}
+  header.onmousedown=dragMouseDown;
+  function dragMouseDown(e){
+    e=e||window.event;
+    e.preventDefault();
+    pos3=e.clientX;
+    pos4=e.clientY;
+    document.onmouseup=closeDragElement;
+    document.onmousemove=elementDrag;
+  }
+  function elementDrag(e){
+    e=e||window.event;
+    e.preventDefault();
+    pos1=pos3-e.clientX;
+    pos2=pos4-e.clientY;
+    pos3=e.clientX;
+    pos4=e.clientY;
+    elm.style.top=(elm.offsetTop-pos2)+"px";
+    elm.style.left=(elm.offsetLeft-pos1)+"px";
+  }
+  function closeDragElement(){
+    document.onmouseup=null;
+    document.onmousemove=null;
+  }
+}
 </script>
 </body>
 </html>
