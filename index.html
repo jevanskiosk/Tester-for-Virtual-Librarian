@@ -10,10 +10,10 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 .qr-section{text-align:center;margin-bottom:20px;}
 .qr-section h3{font-size:30px;margin-bottom:10px;}
 .qr-section img{width:160px;height:160px;display:block;margin:0 auto;}
-.button-section{display:flex;flex-direction:column;gap:15px;align-items:center;}
-.button-group{display:flex;flex-direction:column;gap:6px;align-items:center;}
-.button-group h4{margin:0;font-size:30px;font-weight:600;background:#1e3a8a;color:white;padding:4px 0;text-align:center;border-radius:12px;width:100%;}
-.button-group a{display:block;width:100%;text-align:center;padding:16px 28px;background:#1e3a8a;color:white;font-size:30px;font-weight:600;text-decoration:none;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,.5);transition:background .3s ease,transform .2s ease;cursor:pointer;}
+.button-section{display:flex;flex-direction:column;gap:25px;align-items:center;}
+.button-group{display:flex;flex-direction:column;align-items:center;gap:6px;width:240px;}
+.button-group h4{margin:0;font-size:26px;font-weight:600;text-align:center;width:100%;}
+.button-group a{display:block;width:100%;text-align:center;padding:16px 28px;background:#1e3a8a;color:white;font-size:28px;font-weight:600;text-decoration:none;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,.5);transition:background .3s ease,transform .2s ease;cursor:pointer;}
 .button-group a:hover{background:#3b82f6;transform:scale(1.05);}
 .popup{position:fixed;top:50px;right:50px;width:50%;height:80%;background:white;box-shadow:0 0 15px rgba(0,0,0,.3);z-index:20;display:none;border-radius:12px;overflow:hidden;}
 .popup-header{background:#1e3a8a;color:white;font-weight:600;padding:10px;cursor:move;display:flex;justify-content:space-between;align-items:center;}
@@ -26,8 +26,8 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 <div class="sidebar">
 <div class="qr-section"><h3>Check us out on YouTube</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel"></div>
 <div class="button-section">
-<div class="button-group" style="width:240px"><h4>Our Library Catalog</h4><a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a></div>
-<div class="button-group" style="width:240px"><h4>Our eBook Catalog</h4><a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a></div>
+<div class="button-group"><h4>Our Library Catalog</h4><a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a></div>
+<div class="button-group"><h4>Our eBook Catalog</h4><a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a></div>
 </div></div></div>
 <div class="popup" id="popupWindow"><div class="popup-header" id="popupHeader"><span>Catalog</span><button onclick="closePopup()">✖</button></div><iframe id="popupFrame" src=""></iframe></div>
 <script>
