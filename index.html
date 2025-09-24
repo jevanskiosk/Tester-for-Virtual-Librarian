@@ -13,11 +13,36 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 .container{display:flex;flex-direction:row;align-items:flex-start;padding:0 40px;gap:60px;margin-top:10px;}
 .chatbot{width:26vw;height:85vh;border:none;box-shadow:0 0 10px rgba(0,0,0,0.3);border-radius:12px;background:transparent;margin-left:200px;z-index:5;}
 .sidebar{display:flex;flex-direction:column;max-width:380px;color:white;text-shadow:1px 1px 4px rgba(0,0,0,0.7);margin-left:225px;margin-top:100px;z-index:5;}
-.speech-bubble{position:relative;display:inline-block;background:#f3f3f3;border:4px solid rgba(0,0,0,0.25);border-radius:9999px;padding:30px 70px;color:#111;font-size:28px;font-weight:600;text-align:center;line-height:1.2;transform:rotate(-6deg);margin-left:-210px;margin-top:-90px;box-shadow:0 8px 20px rgba(0,0,0,0.12);}
-.speech-bubble::after{content:"";position:absolute;right:-30px;bottom:20px;width:50px;height:25px;background:#f3f3f3;border:4px solid rgba(0,0,0,0.25);border-left:none;border-radius:50%/40%;}
+.title-box{
+  background:white;
+  color:black;
+  border-radius:9999px;
+  padding:28px 35px;
+  margin-bottom:30px;
+  position:relative;
+  z-index:1;
+  max-width:416px;
+  font-size:28px;
+  font-weight:600;
+  line-height:1.4;
+  margin-left:-75px;
+  transform:rotate(-5deg);
+}
+.title-box::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:80px;
+  height:40px;
+  background:white;
+  border-radius:50%;
+  clip-path:none;
+  pointer-events:none;
+}
 .qr-section{text-align:center;margin-bottom:20px;}
 .qr-section h3{font-size:30px;margin-bottom:10px;}
-.qr-section img{width:160px;height:160px;display:block;margin:0 auto;}
+.qr-section img{width:160px;height:160px;}
 .button-section{display:flex;flex-direction:column;gap:15px;}
 .button-group{display:flex;flex-direction:column;gap:6px;}
 .button-group h4{margin:0;font-size:30px;font-weight:600;}
@@ -27,7 +52,7 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 .popup-header{background:#1e3a8a;color:white;font-weight:600;padding:10px;cursor:move;display:flex;justify-content:space-between;align-items:center;}
 .popup-header button{background:transparent;border:none;color:white;font-size:20px;cursor:pointer;}
 .popup iframe{width:100%;height:calc(100% - 40px);border:none;}
-@media (max-width:800px){.container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}.chatbot{width:90vw;height:75vh;margin-left:0;}.sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;}.speech-bubble{max-width:80%;text-align:center;margin-left:0;transform:rotate(0deg);}.speech-bubble::after{left:50%;bottom:0;transform:translateX(-50%) rotate(180deg);width:30px;height:15px;border-radius:50%;}.qr-section h3{font-size:30px;}.qr-section img{width:130px;height:130px;}.button-group h4{font-size:20px;}.button-group a{font-size:20px;padding:12px 18px;}}
+@media (max-width:800px){.container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}.chatbot{width:90vw;height:75vh;margin-left:0;}.sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;}.title-box{max-width:80%;text-align:center;margin-left:0;transform:rotate(0deg);}.title-box::after{left:50%;bottom:0;transform:translateX(-50%) rotate(180deg);width:30px;height:15px;border-radius:50%;}.qr-section h3{font-size:30px;}.qr-section img{width:130px;height:130px;}.button-group h4{font-size:20px;}.button-group a{font-size:20px;padding:12px 18px;}}
 </style>
 </head>
 <body>
@@ -35,7 +60,7 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 <div class="container">
 <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
 <div class="sidebar">
-<div class="speech-bubble">Chat with our AI book suggestion bot to find the perfect book!</div>
+<div class="title-box">Chat with our AI book suggestion bot to find the perfect book!</div>
 <div class="qr-section"><h3>Check us out on YouTube</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel"></div>
 <div class="button-section">
 <div class="button-group"><h4>Our Library Catalog</h4><a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a></div>
