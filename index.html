@@ -60,6 +60,7 @@ html, body {
   z-index: 5;
 }
 
+/* Sidebar scaled down 10% and moved up 20px */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -68,9 +69,9 @@ html, body {
   color: white;
   text-shadow: 1px 1px 4px rgba(0,0,0,.7);
   margin-left: 225px;
-  margin-top: 350px;
+  margin-top: 330px; /* moved up 20px */
   z-index: 5;
-  transform: scale(.9);
+  transform: scale(0.9); /* 10% smaller */
   transform-origin: top left;
 }
 
@@ -85,29 +86,25 @@ html, body {
 }
 
 .qr-section img {
-  width: 160px;
-  height: 160px;
+  width: 144px; /* 10% smaller than original 160px */
+  height: 144px;
   display: block;
   margin: 0 auto;
 }
 
-/* Extended box wrapping both buttons and titles */
 .button-box {
-  margin-top: 50px; /* moves the whole box down */
-  background: rgba(0, 0, 0, 0.5); /* semi-opaque */
+  margin-top: 50px; /* space below QR section */
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 12px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: scale(0.9); /* 10% smaller */
-  transform-origin: top center;
 }
 
-/* Box header */
 .button-box h3 {
-  font-size: 28px;
+  font-size: 25px; /* 10% smaller than original 28px */
   margin-bottom: 20px;
   font-weight: 600;
   text-align: center;
@@ -115,7 +112,7 @@ html, body {
 
 .button-box h3::before,
 .button-box h3::after {
-  content: '▼'; /* arrows pointing down */
+  content: '▼';
   margin: 0 10px;
 }
 
@@ -132,12 +129,12 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  width: 240px;
+  width: 216px; /* 10% smaller than original 240px */
 }
 
 .button-group h4 {
   margin: 0;
-  font-size: 26px;
+  font-size: 23px; /* 10% smaller than original 26px */
   font-weight: 600;
   text-align: center;
   width: 100%;
@@ -147,10 +144,10 @@ html, body {
   display: block;
   width: 100%;
   text-align: center;
-  padding: 16px 28px;
+  padding: 14px 25px; /* slightly smaller padding */
   background: #1e3a8a;
   color: white;
-  font-size: 28px;
+  font-size: 25px; /* 10% smaller than 28px */
   font-weight: 600;
   text-decoration: none;
   border-radius: 12px;
@@ -221,14 +218,14 @@ html, body {
     max-width: 90%;
     margin-left: 0;
     margin-top: 0;
-    transform: scale(1);
+    transform: scale(0.9);
   }
   .qr-section h3 {
-    font-size: 30px;
+    font-size: 27px;
   }
   .qr-section img {
-    width: 130px;
-    height: 130px;
+    width: 117px;
+    height: 117px;
   }
   .button-box h3 {
     font-size: 22px;
@@ -273,4 +270,61 @@ html, body {
     </div>
 
   </div>
-</d
+</div>
+
+<div class="popup" id="popupWindow">
+  <div class="popup-header" id="popupHeader">
+    <span>Catalog</span>
+    <button onclick="closePopup()">✖</button>
+  </div>
+  <iframe id="popupFrame" src=""></iframe>
+</div>
+
+<script>
+function openPopup(url){
+  document.getElementById('popupFrame').src=url;
+  document.getElementById('popupWindow').style.display='block';
+}
+
+function closePopup(){
+  document.getElementById('popupWindow').style.display='none';
+  document.getElementById('popupFrame').src='';
+}
+
+dragElement(document.getElementById("popupWindow"));
+
+function dragElement(elm){
+  var pos1=0,pos2=0,pos3=0,pos4=0;
+  var header=document.getElementById(elm.id+"Header");
+  if(!header){header=elm;}
+  header.onmousedown=dragMouseDown;
+
+  function dragMouseDown(e){
+    e=e||window.event;
+    e.preventDefault();
+    pos3=e.clientX;
+    pos4=e.clientY;
+    document.onmouseup=closeDragElement;
+    document.onmousemove=elementDrag;
+  }
+
+  function elementDrag(e){
+    e=e||window.event;
+    e.preventDefault();
+    pos1=pos3-e.clientX;
+    pos2=pos4-e.clientY;
+    pos3=e.clientX;
+    pos4=e.clientY;
+    elm.style.top=(elm.offsetTop-pos2)+"px";
+    elm.style.left=(elm.offsetLeft-pos1)+"px";
+  }
+
+  function closeDragElement(){
+    document.onmouseup=null;
+    document.onmousemove=null;
+  }
+}
+</script>
+
+</body>
+</html>
