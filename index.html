@@ -101,6 +101,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: scale(0.9); /* 10% smaller */
+  transform-origin: top center;
 }
 
 /* Box header */
@@ -113,7 +115,7 @@ html, body {
 
 .button-box h3::before,
 .button-box h3::after {
-  content: '➤'; /* arrow icons */
+  content: '▼'; /* arrows pointing down */
   margin: 0 10px;
 }
 
@@ -271,61 +273,4 @@ html, body {
     </div>
 
   </div>
-</div>
-
-<div class="popup" id="popupWindow">
-  <div class="popup-header" id="popupHeader">
-    <span>Catalog</span>
-    <button onclick="closePopup()">✖</button>
-  </div>
-  <iframe id="popupFrame" src=""></iframe>
-</div>
-
-<script>
-function openPopup(url){
-  document.getElementById('popupFrame').src=url;
-  document.getElementById('popupWindow').style.display='block';
-}
-
-function closePopup(){
-  document.getElementById('popupWindow').style.display='none';
-  document.getElementById('popupFrame').src='';
-}
-
-dragElement(document.getElementById("popupWindow"));
-
-function dragElement(elm){
-  var pos1=0,pos2=0,pos3=0,pos4=0;
-  var header=document.getElementById(elm.id+"Header");
-  if(!header){header=elm;}
-  header.onmousedown=dragMouseDown;
-
-  function dragMouseDown(e){
-    e=e||window.event;
-    e.preventDefault();
-    pos3=e.clientX;
-    pos4=e.clientY;
-    document.onmouseup=closeDragElement;
-    document.onmousemove=elementDrag;
-  }
-
-  function elementDrag(e){
-    e=e||window.event;
-    e.preventDefault();
-    pos1=pos3-e.clientX;
-    pos2=pos4-e.clientY;
-    pos3=e.clientX;
-    pos4=e.clientY;
-    elm.style.top=(elm.offsetTop-pos2)+"px";
-    elm.style.left=(elm.offsetLeft-pos1)+"px";
-  }
-
-  function closeDragElement(){
-    document.onmouseup=null;
-    document.onmousemove=null;
-  }
-}
-</script>
-
-</body>
-</html>
+</d
