@@ -91,15 +91,38 @@ html, body {
   margin: 0 auto;
 }
 
+/* Extended box wrapping both buttons and titles */
+.button-box {
+  margin-top: 50px; /* moves the whole box down */
+  background: rgba(0, 0, 0, 0.5); /* semi-opaque */
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Box header */
+.button-box h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.button-box h3::before,
+.button-box h3::after {
+  content: '➤'; /* arrow icons */
+  margin: 0 10px;
+}
+
 .button-section {
   display: flex;
   flex-direction: column;
   gap: 25px;
   align-items: center;
-  margin-top: 50px; /* moves buttons down 50px */
-  background: rgba(0, 0, 0, 0.5); /* semi-opaque box */
-  padding: 20px;
-  border-radius: 12px;
+  width: 100%;
 }
 
 .button-group {
@@ -205,6 +228,9 @@ html, body {
     width: 130px;
     height: 130px;
   }
+  .button-box h3 {
+    font-size: 22px;
+  }
   .button-group h4 {
     font-size: 20px;
   }
@@ -230,16 +256,20 @@ html, body {
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel">
     </div>
 
-    <div class="button-section">
-      <div class="button-group">
-        <h4>Our Library Catalog</h4>
-        <a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a>
-      </div>
-      <div class="button-group">
-        <h4>Our eBook Catalog</h4>
-        <a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a>
+    <div class="button-box">
+      <h3>Coming soon</h3>
+      <div class="button-section">
+        <div class="button-group">
+          <h4>Our Library Catalog</h4>
+          <a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a>
+        </div>
+        <div class="button-group">
+          <h4>Our eBook Catalog</h4>
+          <a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -279,4 +309,23 @@ function dragElement(elm){
     document.onmousemove=elementDrag;
   }
 
-  function eleme
+  function elementDrag(e){
+    e=e||window.event;
+    e.preventDefault();
+    pos1=pos3-e.clientX;
+    pos2=pos4-e.clientY;
+    pos3=e.clientX;
+    pos4=e.clientY;
+    elm.style.top=(elm.offsetTop-pos2)+"px";
+    elm.style.left=(elm.offsetLeft-pos1)+"px";
+  }
+
+  function closeDragElement(){
+    document.onmouseup=null;
+    document.onmousemove=null;
+  }
+}
+</script>
+
+</body>
+</html>
