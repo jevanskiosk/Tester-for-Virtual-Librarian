@@ -12,7 +12,7 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-100%);}}
 .container{display:flex;flex-direction:row;align-items:flex-start;padding:0 40px;gap:60px;margin-top:10px;}
 .chatbot{width:26vw;height:85vh;border:none;box-shadow:0 0 10px rgba(0,0,0,0.3);border-radius:12px;background:transparent;margin-left:200px;z-index:5;}
-.sidebar{display:flex;flex-direction:column;max-width:380px;color:white;text-shadow:1px 1px 4px rgba(0,0,0,0.7);margin-left:225px;margin-top:100px;z-index:5;}
+.sidebar{display:flex;flex-direction:column;max-width:380px;color:white;text-shadow:1px 1px 4px rgba(0,0,0,0.7);margin-left:225px;margin-top:300px;z-index:5;transform:scale(0.7);transform-origin:top left;}
 .qr-section{text-align:center;margin-bottom:20px;}
 .qr-section h3{font-size:30px;margin-bottom:10px;}
 .qr-section img{width:160px;height:160px;}
@@ -25,7 +25,7 @@ html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Baloo 2',cursiv
 .popup-header{background:#1e3a8a;color:white;font-weight:600;padding:10px;cursor:move;display:flex;justify-content:space-between;align-items:center;}
 .popup-header button{background:transparent;border:none;color:white;font-size:20px;cursor:pointer;}
 .popup iframe{width:100%;height:calc(100% - 40px);border:none;}
-@media (max-width:800px){.container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}.chatbot{width:90vw;height:75vh;margin-left:0;}.sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;}.qr-section h3{font-size:30px;}.qr-section img{width:130px;height:130px;}.button-group h4{font-size:20px;}.button-group a{font-size:20px;padding:12px 18px;}}
+@media (max-width:800px){.container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}.chatbot{width:90vw;height:75vh;margin-left:0;}.sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;transform:scale(1);}.qr-section h3{font-size:30px;}.qr-section img{width:130px;height:130px;}.button-group h4{font-size:20px;}.button-group a{font-size:20px;padding:12px 18px;}}
 </style>
 </head>
 <body>
