@@ -8,243 +8,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+  margin: 0; padding: 0;
+  height: 100%; width: 100%;
   font-family: 'Baloo 2', cursive, sans-serif;
   background: url('backgroundwithbubble.png') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
+  overflow-x: hidden; overflow-y: hidden;
 }
 
 .crawl {
-  width: 100%;
-  color: white;
-  padding: 10px 0;
-  font-size: 36px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-shadow: 1px 1px 4px rgba(0,0,0,.8);
-  z-index: 10;
+  width: 100%; color: #fff; padding: 10px 0; font-size: 36px;
+  overflow: hidden; white-space: nowrap;
+  text-shadow: 1px 1px 4px rgba(0,0,0,.8); z-index:10;
 }
-
 .crawl span {
-  display: inline-block;
-  padding-left: 100%;
+  display:inline-block; padding-left:100%;
   animation: scroll-left 50s linear infinite;
 }
-
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
+@keyframes scroll-left { 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0 40px;
-  gap: 60px;
-  margin-top: 10px;
+  display:flex; flex-direction:row; align-items:flex-start;
+  padding:0 40px; gap:60px; margin-top:10px;
 }
 
 .chatbot {
-  width: 26vw;
-  height: 85vh;
-  border: none;
-  box-shadow: 0 0 10px rgba(0,0,0,.3);
-  border-radius: 12px;
-  background: transparent;
-  margin-left: 200px;
-  z-index: 5;
+  width:26vw; height:85vh; border:none;
+  box-shadow:0 0 10px rgba(0,0,0,.3);
+  border-radius:12px; background:transparent;
+  margin-left:200px; z-index:5;
 }
 
-/* Sidebar scaled down 10% and moved up 20px */
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 380px;
-  color: white;
-  text-shadow: 1px 1px 4px rgba(0,0,0,.7);
-  margin-left: 225px;
-  margin-top: 330px; /* moved up 20px */
-  z-index: 5;
-  transform: scale(0.9); /* 10% smaller */
-  transform-origin: top left;
+  display:flex; flex-direction:column; align-items:center;
+  max-width:380px; color:#fff;
+  text-shadow:1px 1px 4px rgba(0,0,0,.7);
+  margin-left:225px; margin-top:290px; /* moved up to fit */
+  z-index:5; transform:scale(0.9); transform-origin:top left;
 }
 
-.qr-section {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.qr-section h3 {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.qr-section img {
-  width: 144px; /* 10% smaller than original 160px */
-  height: 144px;
-  display: block;
-  margin: 0 auto;
-}
+.qr-section { text-align:center; margin-bottom:20px; }
+.qr-section h3 { font-size:30px; margin-bottom:10px; }
+.qr-section img { width:144px; height:144px; display:block; margin:0 auto; }
 
 .button-box {
-  margin-top: 50px; /* space below QR section */
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 12px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top:50px; background:rgba(0,0,0,0.5); padding:20px;
+  border-radius:12px; width:100%; display:flex; flex-direction:column; align-items:center;
 }
-
 .button-box h3 {
-  font-size: 25px; /* 10% smaller than original 28px */
-  margin-bottom: 20px;
-  font-weight: 600;
-  text-align: center;
+  font-size:25px; margin-bottom:20px; font-weight:600; text-align:center;
 }
-
 .button-box h3::before,
-.button-box h3::after {
-  content: '▼';
-  margin: 0 10px;
-}
+.button-box h3::after { content:'▼'; margin:0 10px; }
 
 .button-section {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: center;
-  width: 100%;
+  display:flex; flex-direction:column; gap:25px; align-items:center; width:100%;
 }
-
-.button-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  width: 216px; /* 10% smaller than original 240px */
-}
-
-.button-group h4 {
-  margin: 0;
-  font-size: 23px; /* 10% smaller than original 26px */
-  font-weight: 600;
-  text-align: center;
-  width: 100%;
-}
-
+.button-group { display:flex; flex-direction:column; align-items:center; gap:6px; width:216px; }
+.button-group h4 { margin:0; font-size:23px; font-weight:600; text-align:center; width:100%; }
 .button-group a {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 14px 25px; /* slightly smaller padding */
-  background: #1e3a8a;
-  color: white;
-  font-size: 25px; /* 10% smaller than 28px */
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0,0,0,.5);
-  transition: background .3s ease, transform .2s ease;
-  cursor: pointer;
+  display:block; width:100%; text-align:center;
+  padding:14px 25px; background:#1e3a8a; color:#fff; font-size:25px; font-weight:600;
+  text-decoration:none; border-radius:12px; box-shadow:0 0 8px rgba(0,0,0,.5);
+  transition:background .3s ease, transform .2s ease; cursor:pointer;
 }
-
-.button-group a:hover {
-  background: #3b82f6;
-  transform: scale(1.05);
-}
+.button-group a:hover { background:#3b82f6; transform:scale(1.05); }
 
 .popup {
-  position: fixed;
-  top: 50px;
-  right: 50px;
-  width: 50%;
-  height: 80%;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,.3);
-  z-index: 20;
-  display: none;
-  border-radius: 12px;
-  overflow: hidden;
+  position:fixed; top:50px; right:50px; width:50%; height:80%;
+  background:#fff; box-shadow:0 0 15px rgba(0,0,0,.3);
+  z-index:20; display:none; border-radius:12px; overflow:hidden;
 }
-
 .popup-header {
-  background: #1e3a8a;
-  color: white;
-  font-weight: 600;
-  padding: 10px;
-  cursor: move;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background:#1e3a8a; color:#fff; font-weight:600; padding:10px;
+  cursor:move; display:flex; justify-content:space-between; align-items:center;
 }
-
-.popup-header button {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.popup iframe {
-  width: 100%;
-  height: calc(100% - 40px);
-  border: none;
-}
+.popup-header button { background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer; }
+.popup iframe { width:100%; height:calc(100%-40px); border:none; }
 
 @media(max-width:800px){
-  .container {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    padding: 20px;
-    margin-left: 0;
-  }
-  .chatbot {
-    width: 90vw;
-    height: 75vh;
-    margin-left: 0;
-  }
-  .sidebar {
-    align-items: center;
-    max-width: 90%;
-    margin-left: 0;
-    margin-top: 0;
-    transform: scale(0.9);
-  }
-  .qr-section h3 {
-    font-size: 27px;
-  }
-  .qr-section img {
-    width: 117px;
-    height: 117px;
-  }
-  .button-box h3 {
-    font-size: 22px;
-  }
-  .button-group h4 {
-    font-size: 20px;
-  }
-  .button-group a {
-    font-size: 20px;
-    padding: 12px 18px;
-  }
+  .container{flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}
+  .chatbot{width:90vw;height:75vh;margin-left:0;}
+  .sidebar{align-items:center;max-width:90%;margin-left:0;margin-top:0;transform:scale(0.9);}
+  .qr-section h3{font-size:27px;} .qr-section img{width:117px;height:117px;}
+  .button-box h3{font-size:22px;} .button-group h4{font-size:20px;}
+  .button-group a{font-size:20px;padding:12px 18px;}
 }
 </style>
 </head>
 <body>
 
-<div class="crawl">
-  <span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span>
-</div>
+<div class="crawl"><span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span></div>
 
 <div class="container">
   <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
@@ -268,7 +122,6 @@ html, body {
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -281,48 +134,17 @@ html, body {
 </div>
 
 <script>
-function openPopup(url){
-  document.getElementById('popupFrame').src=url;
-  document.getElementById('popupWindow').style.display='block';
-}
-
-function closePopup(){
-  document.getElementById('popupWindow').style.display='none';
-  document.getElementById('popupFrame').src='';
-}
+function openPopup(url){document.getElementById('popupFrame').src=url;document.getElementById('popupWindow').style.display='block';}
+function closePopup(){document.getElementById('popupWindow').style.display='none';document.getElementById('popupFrame').src='';}
 
 dragElement(document.getElementById("popupWindow"));
-
 function dragElement(elm){
   var pos1=0,pos2=0,pos3=0,pos4=0;
-  var header=document.getElementById(elm.id+"Header");
-  if(!header){header=elm;}
+  var header=document.getElementById(elm.id+"Header"); if(!header){header=elm;}
   header.onmousedown=dragMouseDown;
-
-  function dragMouseDown(e){
-    e=e||window.event;
-    e.preventDefault();
-    pos3=e.clientX;
-    pos4=e.clientY;
-    document.onmouseup=closeDragElement;
-    document.onmousemove=elementDrag;
-  }
-
-  function elementDrag(e){
-    e=e||window.event;
-    e.preventDefault();
-    pos1=pos3-e.clientX;
-    pos2=pos4-e.clientY;
-    pos3=e.clientX;
-    pos4=e.clientY;
-    elm.style.top=(elm.offsetTop-pos2)+"px";
-    elm.style.left=(elm.offsetLeft-pos1)+"px";
-  }
-
-  function closeDragElement(){
-    document.onmouseup=null;
-    document.onmousemove=null;
-  }
+  function dragMouseDown(e){ e=e||window.event; e.preventDefault(); pos3=e.clientX; pos4=e.clientY; document.onmouseup=closeDragElement; document.onmousemove=elementDrag; }
+  function elementDrag(e){ e=e||window.event; e.preventDefault(); pos1=pos3-e.clientX; pos2=pos4-e.clientY; pos3=e.clientX; pos4=e.clientY; elm.style.top=(elm.offsetTop-pos2)+"px"; elm.style.left=(elm.offsetLeft-pos1)+"px"; }
+  function closeDragElement(){ document.onmouseup=null; document.onmousemove=null; }
 }
 </script>
 
