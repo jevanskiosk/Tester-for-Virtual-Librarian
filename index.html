@@ -76,8 +76,16 @@
   <script type="text/javascript">
     function openDestiny() {
       const url = "https://busdlibrary.follettdestiny.com/cataloging/servlet/presentadvancedsearchredirectorform.do?l2m=Library%20Search&tm=TopLevelCatalog&l2m=Library+Search";
-      const features = "width=900,height=700,scrollbars=yes,resizable=yes,noopener,noreferrer";
-      const popup = window.open(url, "Destiny", features);
+
+      // Chromebook-safe popup dimensions & positioning
+      const width = 800;
+      const height = 600;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+
+      const features = `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,noopener,noreferrer`;
+
+      const popup = window.open(url, "DestinyPopup", features);
 
       if (popup) {
         popup.focus();
