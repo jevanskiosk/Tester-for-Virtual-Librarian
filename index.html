@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Library Chatbot</title>
+  <title>Virtual Librarian</title>
 
   <style>
     html, body {
@@ -13,7 +13,6 @@
       width: 100%;
       font-family: Arial, sans-serif;
 
-      /* background image settings */
       background: url('backgroundwithbubble.png') no-repeat center center fixed;
       background-size: cover;
 
@@ -59,7 +58,7 @@
       transform: scale(1.05);
     }
 
-    iframe {
+    iframe.chatbot {
       width: 100%;
       height: 500px;
       border: 2px solid #ccc;
@@ -71,7 +70,7 @@
       .container {
         padding: 20px;
       }
-      iframe {
+      iframe.chatbot {
         height: 400px;
       }
     }
@@ -81,14 +80,12 @@
     function openDestiny() {
       const url = "https://busdlibrary.follettdestiny.com/cataloging/servlet/presentadvancedsearchredirectorform.do?l2m=Library%20Search&tm=TopLevelCatalog&l2m=Library+Search";
 
-      // Chromebook-safe popup dimensions & positioning
       const width = 800;
       const height = 600;
       const left = window.screenX + (window.outerWidth - width) / 2;
       const top = window.screenY + (window.outerHeight - height) / 2;
 
       const features = `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,noopener,noreferrer`;
-
       const popup = window.open(url, "DestinyPopup", features);
 
       if (popup) {
@@ -105,14 +102,16 @@
   <div class="container">
     <p>
       💬 Chat with our AI book suggestion bot to find the perfect book!<br><br>
-      You can also click below to search Mayfair's catalog and check availability while you chat.
+      You can also click the button below to search Mayfair’s catalog while chatting.
     </p>
 
     <button onclick="openDestiny()">🔍 Open Library Catalog</button>
 
-    <iframe 
-      src="chatbot.html"
-      title="Library Chatbot"
+    <iframe
+      class="chatbot"
+      src="https://www.playlab.ai/project/cma1lng2i17v6rgigh3onpno7"
+      title="Virtual Librarian Chatbot"
+      allow="clipboard-write; autoplay"
     ></iframe>
   </div>
 </body>
