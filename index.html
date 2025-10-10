@@ -3,149 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virtual Librarian with Bubble Chatbot</title>
+<title>Virtual Librarian</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: 'Baloo 2', cursive, sans-serif;
-  background: url('backgroundwithbubble.png') no-repeat center center fixed;
-  background-size: cover;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  margin:0;
+  padding:0;
+  height:100%;
+  width:100%;
+  font-family:'Baloo 2',cursive,sans-serif;
+  background:url('backgroundwithbubble.png') no-repeat center center fixed;
+  background-size:cover;
+  overflow-x:hidden;
+  overflow-y:hidden;
 }
 
-/* Crawl text */
+/* Crawl (warning text) */
 .crawl {
-  width: 100%;
-  color: #333;
-  padding: 10px 0;
-  font-size: 36px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-  z-index: 10;
+  width:100%;
+  color:#333;
+  padding:10px 0;
+  font-size:36px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-shadow:2px 2px 8px rgba(0,0,0,0.6);
+  z-index:10;
 }
 .crawl span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-left 50s linear infinite;
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll-left 50s linear infinite;
 }
 @keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% {transform:translateX(0);}
+  100% {transform:translateX(-100%);}
 }
 
 /* Layout */
 .container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0 40px;
-  gap: 60px;
-  margin-top: 20px;
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  padding:0 40px;
+  gap:60px;
+  margin-top:20px;
 }
 
-/* Chat bubble container */
-.chat-bubble-container {
-  position: relative;
-  width: 26vw;
-  height: 85vh;
-  background: url('bubble.png') no-repeat bottom center;
-  background-size: contain;
-  padding: 20px; /* space inside bubble */
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  z-index: 5;
-}
-
-/* Chatbot iframe inside bubble */
-.chat-bubble-container iframe.chatbot {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 0; /* bubble image defines shape */
+/* Chatbot iframe */
+.chatbot {
+  width:26vw;
+  height:85vh;
+  border:4px solid #1e3a8a;
+  box-shadow:0 0 20px rgba(30,58,138,0.7);
+  border-radius:12px;
+  background:rgba(255,255,255,0.5);
+  margin-left:200px;
+  z-index:5;
 }
 
 /* Sidebar with buttons and QR */
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 380px;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-  margin-left: 225px;
-  margin-top: 150px;
-  z-index: 5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:380px;
+  color:#fff;
+  text-shadow:1px 1px 4px rgba(0,0,0,0.7);
+  margin-left:225px;
+  margin-top:150px;
+  z-index:5;
 }
 
 /* Popup buttons */
 .button-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  background: rgba(0,0,0,0.3);
-  padding: 20px;
-  border-radius: 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  background:rgba(0,0,0,0.3);
+  padding:20px;
+  border-radius:12px;
 }
 .button-box button {
-  padding: 12px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  background-color: #1e3a8a;
-  color: #fff;
-  cursor: pointer;
+  padding:12px 20px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  background-color:#1e3a8a;
+  color:#fff;
+  cursor:pointer;
   transition: background 0.3s, transform 0.2s;
 }
 .button-box button:hover {
-  background-color: #3b82f6;
-  transform: scale(1.05);
+  background-color:#3b82f6;
+  transform:scale(1.05);
 }
 
 /* QR Section */
 .qr-section {
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 30px;
+  text-align:center;
+  margin-bottom:20px;
+  margin-top:30px;
 }
 .qr-section h3 {
-  font-size: 36px;
-  margin-bottom: 10px;
-  color: #ffcc00;
-  text-shadow: 0 0 8px rgba(0,0,0,0.7);
-  padding: 8px 12px;
-  border-radius: 8px;
-  background-color: rgba(0,0,0,0.3);
-  display: inline-block;
+  font-size:36px;
+  margin-bottom:10px;
+  color:#ffcc00;
+  text-shadow:0 0 8px rgba(0,0,0,0.7);
+  padding:8px 12px;
+  border-radius:8px;
+  background-color:rgba(0,0,0,0.3);
+  display:inline-block;
 }
 .qr-section img {
-  width: 173px;
-  height: 173px;
-  display: block;
-  margin: 0 auto;
-  border: 3px solid #1e3a8a;
-  box-shadow: 0 0 12px rgba(30,58,138,0.7);
-  border-radius: 12px;
+  width:173px;
+  height:173px;
+  display:block;
+  margin:0 auto;
+  border:3px solid #1e3a8a;
+  box-shadow:0 0 12px rgba(30,58,138,0.7);
+  border-radius:12px;
 }
 
 /* Responsive */
-@media(max-width: 800px){
-  .container { flex-direction: column; align-items: center; gap: 30px; padding: 20px; margin-left: 0; }
-  .chat-bubble-container { width: 90vw; height: 75vh; }
-  .sidebar { align-items: center; max-width: 90%; margin-left: 0; margin-top: 0; }
-  .qr-section h3 { font-size: 32px; }
-  .qr-section img { width: 140px; height: 140px; }
-  .button-box button { font-size: 16px; padding: 10px 15px; }
+@media(max-width:800px){
+  .container {flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}
+  .chatbot {width:90vw;height:75vh;margin-left:0;}
+  .sidebar {align-items:center;max-width:90%;margin-left:0;margin-top:0;}
+  .qr-section h3 {font-size:32px;}
+  .qr-section img {width:140px;height:140px;}
+  .button-box button {font-size:16px;padding:10px 15px;}
 }
 </style>
 
@@ -174,18 +163,15 @@ function openSora() {
   else { alert("Popup blocked! Please allow popups for this site."); }
 }
 </script>
-
 </head>
-<body>
 
+<body>
 <div class="crawl">
   <span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span>
 </div>
 
 <div class="container">
-  <div class="chat-bubble-container">
-    <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
-  </div>
+  <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
 
   <div class="sidebar">
     <div class="qr-section">
@@ -199,6 +185,5 @@ function openSora() {
     </div>
   </div>
 </div>
-
 </body>
 </html>
