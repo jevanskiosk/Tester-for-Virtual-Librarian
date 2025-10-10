@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@ html, body {
   overflow-y:hidden;
 }
 
-/* Crawl warning text */
+/* Crawl (warning text) */
 .crawl {
   width:100%;
   color:#333;
@@ -30,9 +31,6 @@ html, body {
   white-space:nowrap;
   text-shadow:2px 2px 8px rgba(0,0,0,0.6);
   z-index:10;
-  position:fixed;
-  top:0;
-  left:0;
 }
 .crawl span {
   display:inline-block;
@@ -44,51 +42,29 @@ html, body {
   100% {transform:translateX(-100%);}
 }
 
-/* Container for main content */
+/* Layout */
 .container {
   display:flex;
   flex-direction:row;
   align-items:flex-start;
-  justify-content:flex-start;
-  padding:40px;
+  padding:0 40px;
   gap:60px;
-  margin-top:80px;
+  margin-top:20px;
 }
 
-/* Chat bubble wrapper */
-.chatbubble-wrapper {
-  position: relative;
-  width:35vw;
-  min-width:300px;
-  height:80vh;
-  border-radius:40px 40px 40px 0; /* rounded bubble */
-  overflow:hidden;
-  background:rgba(255,255,255,0.6);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  border:4px solid #1e3a8a;
-}
-
-/* Bubble tail pointing left */
-.chatbubble-wrapper::after {
-  content:"";
-  position:absolute;
-  bottom:20px;
-  left:-30px;
-  width:0;
-  height:0;
-  border-top:20px solid transparent;
-  border-bottom:20px solid transparent;
-  border-right:30px solid rgba(255,255,255,0.6);
-}
-
-/* Chatbot iframe inside bubble */
+/* Chatbot iframe */
 .chatbot {
-  width:100%;
-  height:100%;
-  border:none;
+  width:26vw;
+  height:85vh;
+  border:4px solid #1e3a8a;
+  box-shadow:0 0 20px rgba(30,58,138,0.7);
+  border-radius:12px;
+  background:rgba(255,255,255,0.5);
+  margin-left:200px;
+  z-index:5;
 }
 
-/* Sidebar with buttons/QR code */
+/* Sidebar with buttons and QR */
 .sidebar {
   display:flex;
   flex-direction:column;
@@ -96,12 +72,41 @@ html, body {
   max-width:380px;
   color:#fff;
   text-shadow:1px 1px 4px rgba(0,0,0,0.7);
-  margin-top:50px;
+  margin-left:225px;
+  margin-top:150px;
+  z-index:5;
 }
 
+/* Popup buttons */
+.button-box {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  background:rgba(0,0,0,0.3);
+  padding:20px;
+  border-radius:12px;
+}
+.button-box button {
+  padding:12px 20px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  background-color:#1e3a8a;
+  color:#fff;
+  cursor:pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.button-box button:hover {
+  background-color:#3b82f6;
+  transform:scale(1.05);
+}
+
+/* QR Section */
 .qr-section {
   text-align:center;
   margin-bottom:20px;
+  margin-top:30px;
 }
 .qr-section h3 {
   font-size:36px;
@@ -123,45 +128,12 @@ html, body {
   border-radius:12px;
 }
 
-.button-box {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:20px;
-  margin-top:20px;
-}
-.button-box button {
-  padding:12px 20px;
-  font-size:18px;
-  border:none;
-  border-radius:12px;
-  background-color:#1e3a8a;
-  color:#fff;
-  cursor:pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-.button-box button:hover {
-  background-color:#3b82f6;
-  transform:scale(1.05);
-}
-
 /* Responsive */
-@media(max-width:900px){
-  .container {
-    flex-direction:column;
-    align-items:center;
-    gap:30px;
-    padding:20px;
-    margin-top:60px;
-  }
-  .chatbubble-wrapper {
-    width:90vw;
-    height:60vh;
-  }
-  .sidebar {
-    margin-top:20px;
-  }
-  .qr-section h3 {font-size:28px;}
+@media(max-width:800px){
+  .container {flex-direction:column;align-items:center;gap:30px;padding:20px;margin-left:0;}
+  .chatbot {width:90vw;height:75vh;margin-left:0;}
+  .sidebar {align-items:center;max-width:90%;margin-left:0;margin-top:0;}
+  .qr-section h3 {font-size:32px;}
   .qr-section img {width:140px;height:140px;}
   .button-box button {font-size:16px;padding:10px 15px;}
 }
@@ -200,9 +172,7 @@ function openSora() {
 </div>
 
 <div class="container">
-  <div class="chatbubble-wrapper">
-    <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
-  </div>
+  <iframe class="chatbot" src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7" allow="clipboard-write"></iframe>
 
   <div class="sidebar">
     <div class="qr-section">
