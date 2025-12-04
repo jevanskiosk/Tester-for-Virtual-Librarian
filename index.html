@@ -17,9 +17,9 @@ body {
 
 /* Scrolling banner */
 .crawl {
-  color: rgba(0, 0, 0, 0.7);  /* black with 30% transparency (0.7 visible) */
+  color: rgba(0, 0, 0, 0.7);
   padding: 8px 0;
-  font-size: 36px;  /* doubled from 18px */
+  font-size: 36px;
   white-space: nowrap;
   text-shadow: none;
   overflow: hidden;
@@ -54,8 +54,7 @@ body {
 .qr-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* centers the QR code under the text */
-  justify-content: center;
+  align-items: center;
 }
 .qr-section img {
   width: 160px;
@@ -87,6 +86,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0,0,0,0.5);
   transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 .button-group a:hover {
   background: #3b82f6;
@@ -96,49 +96,15 @@ body {
 /* Chatbot */
 .chatbot {
   position: absolute;
-  top: 12%;          /* moved down 5% */
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 20.5vw;     /* keep width */
-  height: 80vh;      /* 10% shorter total */
+  width: 20.5vw;
+  height: 80vh;
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
   background: transparent;
-}
-
-/* Popup window */
-.popup {
-  position: fixed;
-  top: 50px;
-  right: 50px;
-  width: 50%;
-  height: 80%;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  border-radius: 12px;
-  display: none;
-  overflow: hidden;
-}
-.popup-header {
-  background: #1e3a8a;
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.popup-header button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
-.popup iframe {
-  width: 100%;
-  height: calc(100% - 40px);
-  border: none;
 }
 
 /* Mobile layout */
@@ -167,18 +133,25 @@ body {
 <div class="sidebar">
   <div class="qr-section">
     <h3>Check us out on YouTube</h3>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans" alt="QR code for Mr. Evans YouTube channel">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans">
   </div>
 
   <div class="button-section">
+
     <div class="button-group">
       <h4>Our Library Catalog</h4>
-      <a onclick="openPopup('https://busdlibrary.follettdestiny.com/portal')">🔎 Destiny Portal</a>
+      <a onclick="openSmallPopup('https://busdlibrary.follettdestiny.com/portal')">
+        🔎 Destiny Portal
+      </a>
     </div>
+
     <div class="button-group">
       <h4>Our eBook Catalog</h4>
-      <a onclick="openPopup('https://soraapp.com/library/bellflower')">📚 Sora Library</a>
+      <a onclick="openSmallPopup('https://soraapp.com/library/bellflower')">
+        📚 Sora Library
+      </a>
     </div>
+
   </div>
 </div>
 
@@ -189,50 +162,22 @@ body {
   allow="clipboard-write">
 </iframe>
 
-<!-- POPUP -->
-<div class="popup" id="popupWindow">
-  <div class="popup-header" id="popupHeader">
-    <span>Catalog</span>
-    <button onclick="closePopup()">✖</button>
-  </div>
-  <iframe id="popupFrame" src=""></iframe>
-</div>
-
 <script>
-function openPopup(url) {
-  const popup = document.getElementById('popupWindow');
-  const frame = document.getElementById('popupFrame');
-  frame.src = url;
-  popup.style.display = 'block';
-}
-function closePopup() {
-  const popup = document.getElementById('popupWindow');
-  const frame = document.getElementById('popupFrame');
-  popup.style.display = 'none';
-  frame.src = '';
-}
+function openSmallPopup(url) {
+  const w = Math.floor(window.innerWidth / 3);
+  const h = Math.floor(window.innerHeight / 3);
 
-/* Drag popup */
-(function drag() {
-  const elm = document.getElementById("popupWindow");
-  const header = document.getElementById("popupHeader");
-  let x = 0, y = 0, dx = 0, dy = 0;
-  header.onmousedown = e => {
-    e.preventDefault();
-    dx = e.clientX;
-    dy = e.clientY;
-    document.onmouseup = () => { document.onmouseup = null; document.onmousemove = null; };
-    document.onmousemove = e2 => {
-      e2.preventDefault();
-      x = dx - e2.clientX;
-      y = dy - e2.clientY;
-      dx = e2.clientX;
-      dy = e2.clientY;
-      elm.style.top = (elm.offsetTop - y) + "px";
-      elm.style.left = (elm.offsetLeft - x) + "px";
-    };
-  };
-})();
+  const left = Math.floor((window.innerWidth - w) / 2);
+  const top = Math.floor((window.innerHeight - h) / 2);
+
+  // OS/browser popup windows are automatically draggable
+  window.open(
+    url,
+    "_blank",
+    `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
+  );
+}
 </script>
+
 </body>
 </html>
