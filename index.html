@@ -1,152 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Virtual Librarian</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f5f5f5;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 
-  .button-group {
-    margin-bottom: 20px;
-  }
+body {
+  margin: 0;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  background: url('LargeWhiteBubble.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+}
 
-  .button-group a {
-    display: inline-block;
-    padding: 12px 18px;
-    border-radius: 8px;
-    background: #005bbb;
-    color: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 18px;
-  }
+/* Scrolling banner */
+.crawl {
+  color: rgba(0, 0, 0, 0.7);
+  padding: 8px 0;
+  font-size: 36px;
+  white-space: nowrap;
+  text-shadow: none;
+  overflow: hidden;
+}
+.crawl span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 25s linear infinite;
+}
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
 
-  /* Fake popup window (draggable modal) */
-  .popup {
-    position: fixed;
-    width: 66vw; /* DOUBLE SIZE */
-    height: 66vh;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 10px;
-    top: 15%;
-    left: 17%;
-    z-index: 9999;
-    display: none;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  }
+/* Sidebar (left content) */
+.sidebar {
+  position: absolute;
+  top: 120px;
+  left: 8%;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.sidebar h3 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qr-section img {
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 0 auto;
+}
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+.button-group {
+  text-align: center;
+}
+.button-group h4 {
+  margin: 0 0 6px 0;
+  font-size: 24px;
+}
+.button-group a {
+  display: inline-block;
+  padding: 14px 26px;
+  background: #1e3a8a;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.button-group a:hover {
+  background: #3b82f6;
+  transform: scale(1.05);
+}
 
-  .popup-header {
-    width: 100%;
-    background: #333;
-    color: white;
-    padding: 12px;
-    cursor: move;
-    border-radius: 8px 8px 0 0;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-  }
+/* Chatbot */
+.chatbot {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20.5vw;
+  height: 80vh;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  background: transparent;
+}
 
-  .close-btn {
-    cursor: pointer;
-    color: #ff4444;
-    font-weight: bold;
-  }
-
-  .popup-body {
-    padding: 20px;
-    font-size: 18px;
-  }
-
-  .open-link {
+/* Mobile layout */
+@media (max-width: 800px) {
+  .sidebar {
+    position: static;
+    text-align: center;
     margin-top: 20px;
-    display: inline-block;
-    padding: 12px 18px;
-    background: #005bbb;
-    color: #fff;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
   }
+  .chatbot {
+    position: relative;
+    transform: none;
+    width: 90vw;
+    height: 75vh;
+    margin: 20px auto;
+  }
+}
 </style>
 </head>
 <body>
 
-<h2>Library Tools</h2>
-
-<div class="button-group">
-  <a onclick="showPopup('destiny')">🔎 Destiny Portal</a>
+<div class="crawl">
+  <span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span>
 </div>
 
-<div class="button-group">
-  <a onclick="showPopup('sora')">📚 Sora</a>
+<div class="sidebar">
+  <div class="qr-section">
+    <h3>Check us out on YouTube</h3>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans">
+  </div>
+
+  <div class="button-section">
+
+    <div class="button-group">
+      <h4>Our Library Catalog</h4>
+      <a onclick="openSmallPopup('https://busdlibrary.follettdestiny.com/portal')">
+        🔎 Destiny Portal
+      </a>
+    </div>
+
+    <div class="button-group">
+      <h4>Our eBook Catalog</h4>
+      <a onclick="openSmallPopup('https://soraapp.com/library/bellflower')">
+        📚 Sora Library
+      </a>
+    </div>
+
+  </div>
 </div>
 
-<!-- Destiny popup -->
-<div id="popup-destiny" class="popup">
-  <div class="popup-header" onmousedown="startDrag(event, 'popup-destiny')">
-    Destiny Catalog
-    <span class="close-btn" onclick="closePopup('popup-destiny')">✕</span>
-  </div>
-  <div class="popup-body">
-    Destiny cannot load inside a frame, but you can open it in a new tab:
-    <br><br>
-    <a class="open-link" href="https://busdlibrary.follettdestiny.com/portal" target="_blank">Open Destiny</a>
-  </div>
-</div>
-
-<!-- Sora popup -->
-<div id="popup-sora" class="popup">
-  <div class="popup-header" onmousedown="startDrag(event, 'popup-sora')">
-    Sora eBooks
-    <span class="close-btn" onclick="closePopup('popup-sora')">✕</span>
-  </div>
-  <div class="popup-body">
-    Sora blocks frames as well. Open it in a new tab:
-    <br><br>
-    <a class="open-link" href="https://soraapp.com/library/bellflower" target="_blank">Open Sora</a>
-  </div>
-</div>
+<!-- CHATBOT -->
+<iframe
+  class="chatbot"
+  src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7"
+  allow="clipboard-write">
+</iframe>
 
 <script>
-function showPopup(which) {
-  document.querySelectorAll('.popup').forEach(p => p.style.display = "none");
-  document.getElementById("popup-" + which).style.display = "block";
-}
+function openSmallPopup(url) {
+  const w = Math.floor(window.innerWidth / 3);
+  const h = Math.floor(window.innerHeight / 3);
 
-function closePopup(id) {
-  document.getElementById(id).style.display = "none";
-}
+  const left = Math.floor((window.innerWidth - w) / 2);
+  const top = Math.floor((window.innerHeight - h) / 2);
 
-/* Draggable code */
-let offsetX, offsetY, currentPopup = null;
-
-function startDrag(e, id) {
-  currentPopup = document.getElementById(id);
-  offsetX = e.clientX - currentPopup.offsetLeft;
-  offsetY = e.clientY - currentPopup.offsetTop;
-
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("mouseup", stopDrag);
-}
-
-function drag(e) {
-  if (!currentPopup) return;
-  currentPopup.style.left = (e.clientX - offsetX) + "px";
-  currentPopup.style.top = (e.clientY - offsetY) + "px";
-}
-
-function stopDrag() {
-  document.removeEventListener("mousemove", drag);
-  document.removeEventListener("mouseup", stopDrag);
-  currentPopup = null;
+  // OS/browser popup windows are automatically draggable
+  window.open(
+    url,
+    "_blank",
+    `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
+  );
 }
 </script>
 
