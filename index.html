@@ -164,13 +164,13 @@ body {
 
 <script>
 function openSmallPopup(url) {
-  const w = Math.floor(window.innerWidth / 3);
-  const h = Math.floor(window.innerHeight / 3);
+  const w = Math.floor(window.innerWidth * 0.66);   // 2/3 width
+  const h = Math.floor(window.innerHeight * 0.66);  // 2/3 height
 
   const left = Math.floor((window.innerWidth - w) / 2);
   const top = Math.floor((window.innerHeight - h) / 2);
 
-  // OS/browser popup windows are automatically draggable
+  // Opens a popup that stays open until manually closed
   window.open(
     url,
     "_blank",
