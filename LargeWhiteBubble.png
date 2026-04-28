@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Virtual Librarian</title>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
 
@@ -108,17 +107,6 @@ body {
   background: transparent;
 }
 
-/* DESTINY DISCOVER BOX (NEW) */
-.destiny-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 15vw;
-  height: 15vh;
-  border: none;
-  z-index: 10;
-}
-
 /* Mobile layout */
 @media (max-width: 800px) {
   .sidebar {
@@ -136,18 +124,11 @@ body {
 }
 </style>
 </head>
-
 <body>
 
 <div class="crawl">
   <span>⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.</span>
 </div>
-
-<!-- ✅ DESTINY DISCOVER (TOP LEFT 15%) -->
-<iframe
-  class="destiny-box"
-  src="https://busdlibrary.follettdestiny.com/discover/ui/32225">
-</iframe>
 
 <div class="sidebar">
   <div class="qr-section">
@@ -159,7 +140,7 @@ body {
 
     <div class="button-group">
       <h4>Our Library Catalog</h4>
-      <a onclick="openSmallPopup('https://busdlibrary.follettdestiny.com/portal')">
+      <a onclick="openSmallPopup('https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225')">
         🔎 Destiny Portal
       </a>
     </div>
