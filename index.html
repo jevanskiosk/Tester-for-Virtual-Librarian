@@ -32,8 +32,13 @@ body {
 }
 
 @keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* Sidebar */
@@ -116,72 +121,6 @@ body {
   background: transparent;
 }
 
-/* ============================= */
-/* EMBEDDED POPUP WINDOWS */
-/* ============================= */
-
-.popup-panel {
-  position: fixed;
-  width: 31vw;
-  height: 36vh;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
-  overflow: hidden;
-  z-index: 1000;
-  display: none;
-}
-
-/* Top-right Destiny */
-#destinyPanel {
-  right: 20px;
-  top: 80px;
-}
-
-/* Bottom-right Sora */
-#soraPanel {
-  right: 20px;
-  bottom: 20px;
-}
-
-/* Popup header */
-.popup-header {
-  height: 36px;
-  background: #1e3a8a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  box-sizing: border-box;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: move;
-}
-
-/* Close button */
-.popup-close {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0 5px;
-}
-
-.popup-close:hover {
-  color: #ffcccc;
-}
-
-/* Embedded website */
-.popup-panel iframe {
-  width: 100%;
-  height: calc(100% - 36px);
-  border: none;
-  display: block;
-}
-
 /* Mobile */
 @media (max-width: 800px) {
 
@@ -198,21 +137,6 @@ body {
     height: 75vh;
     margin: 20px auto;
   }
-
-  .popup-panel {
-    width: 90vw;
-    height: 40vh;
-    left: 5vw;
-    right: auto;
-  }
-
-  #destinyPanel {
-    top: 100px;
-  }
-
-  #soraPanel {
-    bottom: 20px;
-  }
 }
 </style>
 </head>
@@ -226,37 +150,56 @@ body {
   </span>
 </div>
 
-<!-- SIDEBAR -->
+
+<!-- Sidebar -->
 <div class="sidebar">
 
   <div class="qr-section">
+
     <h3>Check us out on YouTube</h3>
 
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans">
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans"
+    >
+
   </div>
+
 
   <div class="button-section">
 
-    <!-- DESTINY BUTTON -->
+    <!-- DESTINY -->
     <div class="button-group">
+
       <h4>Our Library Catalog</h4>
 
-      <a onclick="togglePanel('destinyPanel')">
+      <a
+        href="https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225"
+        onclick="openDestiny(event)"
+      >
         🔎 Destiny Portal
       </a>
+
     </div>
 
-    <!-- SORA BUTTON -->
+
+    <!-- SORA -->
     <div class="button-group">
+
       <h4>Our eBook Catalog</h4>
 
-      <a onclick="togglePanel('soraPanel')">
+      <a
+        href="https://soraapp.com/library/bellflower"
+        onclick="openSora(event)"
+      >
         📚 Sora Library
       </a>
+
     </div>
 
   </div>
+
 </div>
+
 
 <!-- CHATBOT -->
 <iframe
@@ -266,134 +209,103 @@ body {
 </iframe>
 
 
-<!-- ============================= -->
-<!-- DESTINY PANEL -->
-<!-- ============================= -->
-
-<div id="destinyPanel" class="popup-panel">
-
-  <div class="popup-header">
-
-    <span>🔎 Destiny Portal</span>
-
-    <button
-      class="popup-close"
-      onclick="closePanel('destinyPanel')">
-      ×
-    </button>
-
-  </div>
-
-  <iframe
-    src="https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225">
-  </iframe>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- SORA PANEL -->
-<!-- ============================= -->
-
-<div id="soraPanel" class="popup-panel">
-
-  <div class="popup-header">
-
-    <span>📚 Sora Library</span>
-
-    <button
-      class="popup-close"
-      onclick="closePanel('soraPanel')">
-      ×
-    </button>
-
-  </div>
-
-  <iframe
-    src="https://soraapp.com/library/bellflower">
-  </iframe>
-
-</div>
-
-
 <script>
 
-/* ============================= */
-/* OPEN / CLOSE PANELS */
-/* ============================= */
+/*
+====================================================
+POPUP SETTINGS
+====================================================
+*/
 
-function togglePanel(panelID) {
+const popupWidth = Math.floor(window.screen.availWidth / 3);
+const popupHeight = Math.floor(window.screen.availHeight / 3);
 
-  const panel = document.getElementById(panelID);
+const rightMargin = 20;
+const topMargin = 80;
 
-  if (panel.style.display === "block") {
 
-    panel.style.display = "none";
+/*
+====================================================
+DESTINY POPUP
+====================================================
+*/
 
-  } else {
+function openDestiny(event) {
 
-    panel.style.display = "block";
+  event.preventDefault();
 
-  }
+  const url =
+    "https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225";
+
+  const left =
+    window.screen.availWidth -
+    popupWidth -
+    rightMargin;
+
+  const top =
+    topMargin;
+
+  const features =
+    "width=" + popupWidth +
+    ",height=" + popupHeight +
+    ",left=" + left +
+    ",top=" + top +
+    ",resizable=yes" +
+    ",scrollbars=yes" +
+    ",toolbar=no" +
+    ",menubar=no" +
+    ",location=yes" +
+    ",status=no";
+
+  window.open(
+    url,
+    "DestinyLibraryWindow",
+    features
+  );
 }
 
 
-function closePanel(panelID) {
+/*
+====================================================
+SORA POPUP
+====================================================
+*/
 
-  document.getElementById(panelID).style.display = "none";
+function openSora(event) {
 
+  event.preventDefault();
+
+  const url =
+    "https://soraapp.com/library/bellflower";
+
+  const left =
+    window.screen.availWidth -
+    popupWidth -
+    rightMargin;
+
+  const top =
+    window.screen.availHeight -
+    popupHeight -
+    rightMargin;
+
+  const features =
+    "width=" + popupWidth +
+    ",height=" + popupHeight +
+    ",left=" + left +
+    ",top=" + top +
+    ",resizable=yes" +
+    ",scrollbars=yes" +
+    ",toolbar=no" +
+    ",menubar=no" +
+    ",location=yes" +
+    ",status=no";
+
+  window.open(
+    url,
+    "SoraLibraryWindow",
+    features
+  );
 }
-
-
-/* ============================= */
-/* DRAGGABLE POPUPS */
-/* ============================= */
-
-let activePanel = null;
-let offsetX = 0;
-let offsetY = 0;
-
-
-/* Start dragging */
-document.addEventListener("mousedown", function(event) {
-
-  const header = event.target.closest(".popup-header");
-
-  if (!header) return;
-
-  activePanel = header.parentElement;
-
-  const rect = activePanel.getBoundingClientRect();
-
-  offsetX = event.clientX - rect.left;
-  offsetY = event.clientY - rect.top;
-
-});
-
-
-/* Drag */
-document.addEventListener("mousemove", function(event) {
-
-  if (!activePanel) return;
-
-  activePanel.style.left =
-    (event.clientX - offsetX) + "px";
-
-  activePanel.style.top =
-    (event.clientY - offsetY) + "px";
-
-  activePanel.style.right = "auto";
-  activePanel.style.bottom = "auto";
-
-});
-
-
-/* Stop dragging */
-document.addEventListener("mouseup", function() {
-
-  activePanel = null;
-
-});
 
 </script>
 
