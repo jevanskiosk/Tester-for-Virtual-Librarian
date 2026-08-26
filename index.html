@@ -116,8 +116,75 @@ body {
   background: transparent;
 }
 
+/* ============================= */
+/* EMBEDDED POPUP WINDOWS */
+/* ============================= */
+
+.popup-panel {
+  position: fixed;
+  width: 31vw;
+  height: 36vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  overflow: hidden;
+  z-index: 1000;
+  display: none;
+}
+
+/* Top-right Destiny */
+#destinyPanel {
+  right: 20px;
+  top: 80px;
+}
+
+/* Bottom-right Sora */
+#soraPanel {
+  right: 20px;
+  bottom: 20px;
+}
+
+/* Popup header */
+.popup-header {
+  height: 36px;
+  background: #1e3a8a;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: move;
+}
+
+/* Close button */
+.popup-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.popup-close:hover {
+  color: #ffcccc;
+}
+
+/* Embedded website */
+.popup-panel iframe {
+  width: 100%;
+  height: calc(100% - 36px);
+  border: none;
+  display: block;
+}
+
 /* Mobile */
 @media (max-width: 800px) {
+
   .sidebar {
     position: static;
     text-align: center;
@@ -131,43 +198,59 @@ body {
     height: 75vh;
     margin: 20px auto;
   }
+
+  .popup-panel {
+    width: 90vw;
+    height: 40vh;
+    left: 5vw;
+    right: auto;
+  }
+
+  #destinyPanel {
+    top: 100px;
+  }
+
+  #soraPanel {
+    bottom: 20px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- Scrolling banner -->
 <div class="crawl">
   <span>
     ⚠️ AI may give incorrect or outdated information — verify important details. • Never share personal or sensitive data. • This chatbot is a support tool, not a replacement for professional advice.
   </span>
 </div>
 
+<!-- SIDEBAR -->
 <div class="sidebar">
 
   <div class="qr-section">
     <h3>Check us out on YouTube</h3>
+
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.youtube.com/c/mrevans">
   </div>
 
   <div class="button-section">
 
+    <!-- DESTINY BUTTON -->
     <div class="button-group">
       <h4>Our Library Catalog</h4>
-      <a onclick="openSmallPopup(
-        'https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225',
-        'destiny'
-      )">
+
+      <a onclick="togglePanel('destinyPanel')">
         🔎 Destiny Portal
       </a>
     </div>
 
+    <!-- SORA BUTTON -->
     <div class="button-group">
       <h4>Our eBook Catalog</h4>
-      <a onclick="openSmallPopup(
-        'https://soraapp.com/library/bellflower',
-        'sora'
-      )">
+
+      <a onclick="togglePanel('soraPanel')">
         📚 Sora Library
       </a>
     </div>
@@ -176,41 +259,141 @@ body {
 </div>
 
 <!-- CHATBOT -->
-<iframe class="chatbot"
+<iframe
+  class="chatbot"
   src="https://www.playlab.ai/embedded/cma1lng2i17v6rgigh3onpno7"
   allow="clipboard-write">
 </iframe>
 
+
+<!-- ============================= -->
+<!-- DESTINY PANEL -->
+<!-- ============================= -->
+
+<div id="destinyPanel" class="popup-panel">
+
+  <div class="popup-header">
+
+    <span>🔎 Destiny Portal</span>
+
+    <button
+      class="popup-close"
+      onclick="closePanel('destinyPanel')">
+      ×
+    </button>
+
+  </div>
+
+  <iframe
+    src="https://busdlibrary.follettdestiny.com/portal/portal?app=Destiny%20Discover&appId=destiny-HGDN-TZ6F&siteGuid=7E2D9B06-9998-4EAF-AF9A-AE1C13D1FC38&nav=https:%2F%2Fbusdlibrary.follettdestiny.com%2Fmetasearch%2Fui%2F32225">
+  </iframe>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- SORA PANEL -->
+<!-- ============================= -->
+
+<div id="soraPanel" class="popup-panel">
+
+  <div class="popup-header">
+
+    <span>📚 Sora Library</span>
+
+    <button
+      class="popup-close"
+      onclick="closePanel('soraPanel')">
+      ×
+    </button>
+
+  </div>
+
+  <iframe
+    src="https://soraapp.com/library/bellflower">
+  </iframe>
+
+</div>
+
+
 <script>
 
-function openSmallPopup(url, popupName) {
+/* ============================= */
+/* OPEN / CLOSE PANELS */
+/* ============================= */
 
-  // Popup size
-  const w = Math.floor(window.innerWidth / 3);
-  const h = Math.floor(window.innerHeight / 3);
+function togglePanel(panelID) {
 
-  // Keep popups on the RIGHT side
-  const left = window.innerWidth - w - 20;
+  const panel = document.getElementById(panelID);
 
-  let top;
+  if (panel.style.display === "block") {
 
-  // DESTINY = TOP RIGHT
-  if (popupName === 'destiny') {
-    top = 80;
+    panel.style.display = "none";
+
+  } else {
+
+    panel.style.display = "block";
+
   }
-
-  // SORA = BOTTOM RIGHT
-  if (popupName === 'sora') {
-    top = window.innerHeight - h - 20;
-  }
-
-  // Open each site in its OWN named window
-  window.open(
-    url,
-    popupName,
-    `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
-  );
 }
+
+
+function closePanel(panelID) {
+
+  document.getElementById(panelID).style.display = "none";
+
+}
+
+
+/* ============================= */
+/* DRAGGABLE POPUPS */
+/* ============================= */
+
+let activePanel = null;
+let offsetX = 0;
+let offsetY = 0;
+
+
+/* Start dragging */
+document.addEventListener("mousedown", function(event) {
+
+  const header = event.target.closest(".popup-header");
+
+  if (!header) return;
+
+  activePanel = header.parentElement;
+
+  const rect = activePanel.getBoundingClientRect();
+
+  offsetX = event.clientX - rect.left;
+  offsetY = event.clientY - rect.top;
+
+});
+
+
+/* Drag */
+document.addEventListener("mousemove", function(event) {
+
+  if (!activePanel) return;
+
+  activePanel.style.left =
+    (event.clientX - offsetX) + "px";
+
+  activePanel.style.top =
+    (event.clientY - offsetY) + "px";
+
+  activePanel.style.right = "auto";
+  activePanel.style.bottom = "auto";
+
+});
+
+
+/* Stop dragging */
+document.addEventListener("mouseup", function() {
+
+  activePanel = null;
+
+});
 
 </script>
 
